@@ -1,0 +1,67 @@
+[System]
+Name='MFLC_Path_Following_Master'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=2
+NumRules=0
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='dRP'
+Range=[0 1]
+NumMFs=5
+MF1='VeryClose':'trimf',[-0.1 0 0.1]
+MF2='Close':'trimf',[0.05 0.1 0.15]
+MF3='Medium':'trimf',[0.1 0.2 0.3]
+MF4='Far':'trimf',[0.25 0.35 0.45]
+MF5='VeryFar':'trapmf',[0.4 0.6 0.6 Inf]
+
+[Input2]
+Name='Alpha'
+Range=[-150 150]
+NumMFs=5
+MF1='MediumNeg':'trimf',[-100 -20 0]
+MF2='Small':'trimf',[-10 0 10]
+MF3='MediumPositive':'trimf',[0 20 100]
+MF4='BigNegative':'trapmf',[-Inf -Inf -100 -50]
+MF5='BigPositive':'trapmf',[50 100 Inf Inf]
+
+[Input3]
+Name='xErr'
+Range=[-3 3]
+NumMFs=7
+MF1='NegativeClose':'trimf',[-0.8 -0.4 0]
+MF2='VeryClose':'trimf',[-0.15 0 0.15]
+MF3='Close':'trimf',[0 0.4 0.8]
+MF4='Far':'trimf',[0.5 1.5 2.5]
+MF5='VeryFar':'trapmf',[1.8 2 Inf Inf]
+MF6='NegativeFar':'trimf',[-2.5 -1.5 -0.5]
+MF7='NegativeVeryFar':'trapmf',[-Inf -Inf -2 -1.8]
+
+[Output1]
+Name='LinearVelocity'
+Range=[0 1]
+NumMFs=6
+MF1='VeryVerySlow':'trimf',[0.05 0.15 0.25]
+MF2='VerySlow':'trimf',[0.15 0.25 0.35]
+MF3='Slow':'trimf',[0.3 0.4 0.5]
+MF4='Fast':'trimf',[0.45 0.55 0.65]
+MF5='Zero':'trimf',[-0.5 0 0.1]
+MF6='VeryFast':'trapmf',[0.6 0.7 Inf Inf]
+
+[Output2]
+Name='AngularVelocity'
+Range=[-1 1]
+NumMFs=5
+MF1='BigNegative':'trimf',[-1.8 -1 -0.7]
+MF2='Zero':'trimf',[-0.3 0 0.3]
+MF3='BigPositive':'trimf',[0.7 1 1.8]
+MF4='Negative':'trimf',[-0.8 -0.5 -0.2]
+MF5='Positive':'trimf',[0.2 0.5 0.8]
+
+[Rules]
